@@ -62,5 +62,5 @@ jobs:
         with:
           app-name: 'msqlPhp'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A5D6491E30824ED580B27890CD88CCEB }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_062A4FCA18DB4141959BFF1A68A074D3 }}
           package: .
