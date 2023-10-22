@@ -4,5 +4,10 @@
     "license": "proprietary",
     "require": {
         "vlucas/phpdotenv": "^5.5"
+    },
+    "config": {
+        "platform": {
+            "php": "8.0"
+        }
     }
 }
