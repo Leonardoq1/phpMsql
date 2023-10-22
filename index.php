@@ -6,24 +6,13 @@
 <body>
 
 <?php
- require __DIR__ . '/vendor/autoload.php'; // Cargar el autoload de Composer
 
- use Dotenv\Dotenv;
-
- $dotenv = Dotenv::createImmutable(__DIR__);
- $dotenv->load();
-
- // Variables de entorno
- $dbServer = $_ENV['DB_SERVER'];
- $dbUsername = $_ENV['DB_USERNAME'];
- $dbPassword = $_ENV['DB_PASSWORD'];
- $dbName = $_ENV['DB_NAME'];
 $sslCa = "/certificados/DigiCertGlobalRootCA.crt.pem"; // Ruta al certificado CA
 
 // Configurar la conexión
 $con = mysqli_init();
 mysqli_ssl_set($con, NULL, NULL, $sslCa, NULL, NULL);
-$conn = mysqli_real_connect($con, $dbServer, $dbUsername, $dbPassword, $dbName, 3306, MYSQLI_CLIENT_SSL);
+$conn = mysqli_real_connect($conn, "leonardo.mysql.database.azure.com", "leonardo", "Br@ya2001", "db_leonado_dev", 3306, MYSQLI_CLIENT_SSL);
 
 // Verificar la conexión
 if (!$conn) {
