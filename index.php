@@ -6,15 +6,23 @@
 <body>
 
 <?php
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+// Cargar las variables de entorno desde el archivo .env
+$dotenvFilePath = __DIR__ . '/.env';
+
+if (file_exists($dotenvFilePath)) {
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+} else {
+    // Manejo de errores si el archivo .env no se encuentra
+    die('El archivo .env no se encuentra.');
+}
 
 // Variables de entorno
 $dbServer = $_ENV['DB_SERVER'];
 $dbUsername = $_ENV['DB_USERNAME'];
 $dbPassword = $_ENV['DB_PASSWORD'];
 $dbName = $_ENV['DB_NAME'];
-$sslCa = "certificados/DigiCertGlobalRootCA.crt.pem";
+$sslCa = "certificados/nombre_certificado.pem"; // Ruta al certificado CA
 
 // Configurar la conexión
 $con = mysqli_init();
@@ -57,6 +65,7 @@ echo "</table>";
 // Cerrar la conexión
 mysqli_close($conn);
 ?>
+
 
 </body>
 </html>
