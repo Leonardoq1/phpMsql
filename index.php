@@ -11,12 +11,16 @@ $sslCa = "/certificados/DigiCertGlobalRootCA.crt.pem"; // Ruta al certificado CA
 
 // Configurar la conexión
 $con = mysqli_init();
-mysqli_ssl_set($con, NULL, NULL, $sslCa, NULL, NULL);
+mysqli_ssl_set($con, NULL, NULL, "/certificados/DigiCertGlobalRootCA.crt.pem", NULL, NULL);
 $conn = mysqli_real_connect($conn, "leonardo.mysql.database.azure.com", "leonardo", "Br@ya2001", "db_leonado_dev", 3306, MYSQLI_CLIENT_SSL);
 
 // Verificar la conexión
 if (!$conn) {
     die("Conexión fallida: " . mysqli_connect_error());
+}
+
+if ($conn) {
+    die("Exitosa ");
 }
 
 // Seleccionar todos los usuarios de la tabla "users"
