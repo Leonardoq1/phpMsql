@@ -1,4 +1,7 @@
 {
+    "name": "web",
+    "description": "Descripción de tu aplicación",
+    "license": "proprietary",
     "require": {
         "vlucas/phpdotenv": "^5.5"
     }
