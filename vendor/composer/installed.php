@@ -3,7 +3,7 @@
         'name' => 'nombre-vendedor/nombre-proyecto',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '5683c337c58ec89bfd009c4097efdc060cd6ce1f',
+        'reference' => '0dffa9be5a12e782135e908c6158203b4be39879',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'nombre-vendedor/nombre-proyecto' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '5683c337c58ec89bfd009c4097efdc060cd6ce1f',
+            'reference' => '0dffa9be5a12e782135e908c6158203b4be39879',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
