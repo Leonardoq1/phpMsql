@@ -14,38 +14,48 @@ $dbServer = $_ENV['DB_SERVER'];
 $dbUsername = $_ENV['DB_USERNAME'];
 $dbPassword = $_ENV['DB_PASSWORD'];
 $dbName = $_ENV['DB_NAME'];
+$sslCa = "certificados/DigiCertGlobalRootCA.crt.pem";
 
-try {
-    // Conexión a la base de datos utilizando PDO
-    $conn = new PDO("mysql:host=$dbServer;dbname=$dbName", $dbUsername, $dbPassword);
+// Configurar la conexión
+$con = mysqli_init();
+mysqli_ssl_set($con, NULL, NULL, $sslCa, NULL, NULL);
+$conn = mysqli_real_connect($con, $dbServer, $dbUsername, $dbPassword, $dbName, 3306, MYSQLI_CLIENT_SSL);
 
-    // Establecer el modo de error de PDO a excepción
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Seleccionar todos los usuarios de la tabla "users"
-    $stmt = $conn->prepare("SELECT * FROM users");
-    $stmt->execute();
-
-    // Mostrar los resultados en una tabla HTML
-    echo "<h2>Usuarios:</h2>";
-    echo "<table border='1'>
-    <tr>
-    <th>ID</th>
-    <th>Nombre</th>
-    <th>Email</th>
-    </tr>";
-
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        echo "<tr>";
-        echo "<td>" . $row['id'] . "</td>";
-        echo "<td>" . $row['nombre'] . "</td>";
-        echo "<td>" . $row['email'] . "</td>";
-        echo "</tr>";
-    }
-    echo "</table>";
-} catch (PDOException $e) {
-    echo "Error de conexión: " . $e->getMessage();
+// Verificar la conexión
+if (!$conn) {
+    die("Conexión fallida: " . mysqli_connect_error());
 }
+
+// Seleccionar todos los usuarios de la tabla "users"
+$query = "SELECT * FROM users";
+$result = mysqli_query($conn, $query);
+
+// Mostrar los resultados en una tabla HTML
+echo "<h2>Usuarios:</h2>";
+echo "<table border='1'>
+<tr>
+<th>ID</th>
+<th>Nombres</th>
+<th>Apellidos</th>
+<th>Dirección</th>
+<th>Correo</th>
+<th>Teléfono</th>
+</tr>";
+
+while ($row = mysqli_fetch_assoc($result)) {
+    echo "<tr>";
+    echo "<td>" . $row['id'] . "</td>";
+    echo "<td>" . $row['nombres'] . "</td>";
+    echo "<td>" . $row['apellidos'] . "</td>";
+    echo "<td>" . $row['direccion'] . "</td>";
+    echo "<td>" . $row['correo'] . "</td>";
+    echo "<td>" . $row['telefono'] . "</td>";
+    echo "</tr>";
+}
+echo "</table>";
+
+// Cerrar la conexión
+mysqli_close($conn);
 ?>
 
 </body>
