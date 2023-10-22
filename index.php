@@ -6,23 +6,19 @@
 <body>
 
 <?php
-// Cargar las variables de entorno desde el archivo .env
-$dotenvFilePath = __DIR__ . '/.env';
+ require __DIR__ . '/vendor/autoload.php'; // Cargar el autoload de Composer
 
-if (file_exists($dotenvFilePath)) {
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
-} else {
-    // Manejo de errores si el archivo .env no se encuentra
-    die('El archivo .env no se encuentra.');
-}
+ use Dotenv\Dotenv;
 
-// Variables de entorno
-$dbServer = $_ENV['DB_SERVER'];
-$dbUsername = $_ENV['DB_USERNAME'];
-$dbPassword = $_ENV['DB_PASSWORD'];
-$dbName = $_ENV['DB_NAME'];
-$sslCa = "certificados/nombre_certificado.pem"; // Ruta al certificado CA
+ $dotenv = Dotenv::createImmutable(__DIR__);
+ $dotenv->load();
+
+ // Variables de entorno
+ $dbServer = $_ENV['DB_SERVER'];
+ $dbUsername = $_ENV['DB_USERNAME'];
+ $dbPassword = $_ENV['DB_PASSWORD'];
+ $dbName = $_ENV['DB_NAME'];
+$sslCa = "/certificados/DigiCertGlobalRootCA.crt.pem"; // Ruta al certificado CA
 
 // Configurar la conexión
 $con = mysqli_init();
